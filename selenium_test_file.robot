@@ -4,7 +4,10 @@ Library    String
 Test Setup    Open Browser    browser=chrome    url=${url}
 Test Teardown    Close Browser
 Resource    resources/login_page_object.robot
-Resource    resources/dashboard_page_object.robot
+Resource    resources/dashboard/dashboard_admin_page_object.robot
+Resource    resources/dashboard/dashboard_user_page_object.robot
+Resource    resources/sidepanel/sidepanel_user_page_object.robot
+Resource    resources/sidepanel/sidepanel_admin_page_object.robot
 
 *** Variables ***
 ${url}    https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
@@ -28,16 +31,36 @@ Validate login page
     Element Text Should Be    locator=${login_btn}    expected=Login
     Element Text Should Be    locator=${forgot_passwd}    expected=Forgot your password?
 
-Validate successful login
+Validate successful Admin login
     Login page is loaded after some time
     Input Text    locator=${user_input}    text=Admin
     Input Text    locator=${passwd_input}    text=admin123
     Click Button    locator=${login_btn}
-    Dashboard page is loaded after some time
+    Dashboard Admin page is loaded after some time
 
-Validate successful login2
-    Login page is loaded after some time
+Validate successful Admin login while specifying page load timeout
+    Login page is loaded after    timeout=10
     Input Text    locator=${user_input}    text=Admin
     Input Text    locator=${passwd_input}    text=admin123
     Click Button    locator=${login_btn}
-    Dashboard page is loaded after    timeout=10    
+    Dashboard Admin page is loaded after    timeout=10    
+
+Validate Admin Dashboard page
+    Login page is loaded after some time
+    Login using user and passwd    Admin    admin123
+    Sidepanel admin page is loaded after some time
+    Dashboard Admin page is loaded after some time
+    Element Text Should Be    locator=${dash_title}    expected=Dashboard
+    Element Text Should Be    locator=${upgrade_btn}    expected=Upgrade
+    Element Text Should Be    locator=${user_dropdown_name}    expected=manda user
+    Element Text Should Be    locator=${time_at_work_header}    expected=Time at Work
+
+Validate successful user login
+    Login page is loaded after some time
+    Login using user and passwd    seplusi1    12QWaszx
+    Sidepanel user page is loaded after some time
+    Dashboard user page is loaded after some time
+    Element Should Not Be Visible    locator=${upgrade_btn}
+    Element Text Should Be    locator=${dash_title}    expected=Dashboard
+    Element Text Should Be    locator=${user_dropdown_name}    expected=Jack Bauer
+    Element Text Should Be    locator=${time_at_work_header}    expected=Time at Work

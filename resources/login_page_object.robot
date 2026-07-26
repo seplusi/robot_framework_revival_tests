@@ -21,3 +21,17 @@ Login page is loaded after some time
     ...    ${username_label}    ${user_input}    ${password_label}    
     ...    ${passwd_input}    ${title}    ${user_icon}    ${passwd_icon}    
     ...    ${login_btn}
+
+Login page is loaded after
+    [Arguments]    ${timeout}
+    Log To Console    message=Page load timeout is ${timeout}
+    Page is loaded after time    ${timeout}    
+    ...    ${username_label}    ${user_input}    ${password_label}    
+    ...    ${passwd_input}    ${title}    ${user_icon}    ${passwd_icon}    
+    ...    ${login_btn}
+
+Login using user and passwd
+    [Arguments]    ${username}    ${passwd}
+    Input Text    locator=${user_input}    text=${username}
+    Input Text    locator=${passwd_input}    text=${passwd}
+    Click Button    locator=${login_btn}
