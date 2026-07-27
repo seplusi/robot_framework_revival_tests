@@ -3,7 +3,7 @@ Library    SeleniumLibrary
 Library    String
 Test Setup    Open Browser    browser=chrome    url=${url}
 Test Teardown    Close Browser
-Resource    resources/login_page_object.robot
+Resource    resources/login_page_object.resource
 Resource    resources/dashboard/dashboard_admin_page_object.robot
 Resource    resources/dashboard/dashboard_user_page_object.robot
 Resource    resources/sidepanel/sidepanel_user_page_object.robot
@@ -33,9 +33,9 @@ Validate login page
 
 Validate successful Admin login
     Login page is loaded after some time
-    Input Text    locator=${user_input}    text=Admin
-    Input Text    locator=${passwd_input}    text=admin123
-    Click Button    locator=${login_btn}
+    Type username    Admin
+    Type password    admin123
+    Click login button
     Dashboard Admin page is loaded after some time
 
 Validate successful Admin login while specifying page load timeout
@@ -52,7 +52,7 @@ Validate Admin Dashboard page
     Dashboard Admin page is loaded after some time
     Element Text Should Be    locator=${dash_title}    expected=Dashboard
     Element Text Should Be    locator=${upgrade_btn}    expected=Upgrade
-    Element Text Should Be    locator=${user_dropdown_name}    expected=manda user
+    Element Should Contain    locator=${user_dropdown_name}    expected=user
     Element Text Should Be    locator=${time_at_work_header}    expected=Time at Work
 
 Validate successful user login

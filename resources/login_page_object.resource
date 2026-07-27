@@ -11,7 +11,10 @@ ${passwd_icon}    css:i[class*="bi-key"]
 ${login_btn}    css:button[type="submit"]
 ${forgot_passwd}    css:div.orangehrm-login-forgot > p
 ${passwd_input}    css:input[name="password"]
+${passwd_input_error_msg}    css:form[class="oxd-form"] > div[class="oxd-form-row"]:nth-of-type(2) span[class*="error"]
 ${user_input}      css:input[name="username"]
+${user_input_error_msg}    css:form[class="oxd-form"] > div[class="oxd-form-row"]:nth-of-type(1) span[class*="error"]
+${login_err}    css:p[class*="oxd-alert-content-text"]
 
 *** Keywords ***
 Login page is loaded after some time
@@ -34,4 +37,15 @@ Login using user and passwd
     [Arguments]    ${username}    ${passwd}
     Input Text    locator=${user_input}    text=${username}
     Input Text    locator=${passwd_input}    text=${passwd}
+    Click Button    locator=${login_btn}
+
+Type username
+    [Arguments]    ${username}
+    Input Text    locator=${user_input}    text=${username}
+
+Type password
+    [Arguments]    ${password}
+    Input Text    locator=${passwd_input}    text=${password}
+
+Click login button
     Click Button    locator=${login_btn}
