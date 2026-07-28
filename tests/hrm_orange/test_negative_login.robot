@@ -1,7 +1,7 @@
 *** Settings ***
 Suite Setup    Open Browser    browser=Chrome    url=${url}    options=add_argument("--guest")
 Suite Teardown    Close Browser
-Resource    resources/login_page_object.resource
+Resource    ../../resources/login_page_object.resource
 
 *** Variables ***
 ${url}    https://opensource-demo.orangehrmlive.com/web/index.php/auth/login

@@ -1,6 +1,6 @@
 *** Settings ***
 Library    SeleniumLibrary
-Resource    page_objects_common_keywords.robot
+Resource    ../page_objects_common_keywords.robot
 
 *** Variables ***
 ${dash_title}    css:h6[class*="topbar"]

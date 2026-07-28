@@ -1,5 +1,5 @@
 *** Settings ***
-Resource    dashboard/dashboard_common_page_object.robot
+Resource    dashboard_common_page_object.robot
 
 *** Keywords ***
 Dashboard user page is loaded after some time

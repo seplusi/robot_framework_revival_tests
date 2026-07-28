@@ -12,4 +12,6 @@ Sidepanel user page is loaded after
     Page is loaded after time    ${timeout}    ${sidepanel_brand}    ${chevron_left}    
     ...    ${search_text_box}    ${leave_btn}    ${time_btn}    ${my_info_btn}    
     ...    ${perform_btn}    ${dashboard_btn}    ${directory_btn}    ${claim_btn}    
-    ...    ${buzz_btn}    
+    ...    ${buzz_btn}    ${buzz_legend}    ${leave_legend}    ${time_legend}
+    ...    ${my_info_legend}    ${perform_legend}    ${dashboard_legend}
+    ...    ${directory_legend}    ${claim_legend}    ${buzz_legend}
