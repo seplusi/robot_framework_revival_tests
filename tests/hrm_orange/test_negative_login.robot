@@ -5,6 +5,8 @@ Resource    ../../resources/login_page_object.resource
 
 *** Variables ***
 ${url}    https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
+@{users_list}  blah  admin
+@{passwd_list}  admin123  123456  blah
 
 *** Keywords ***
 Test failed login with non-empty credentials
@@ -52,11 +54,11 @@ Test login with empty password
     ...    locator_without_err=${user_input_error_msg}
 
 Test login with invalid username
-    Test failed login with non-empty credentials    blah    admin123
+    Test failed login with non-empty credentials  ${users_list}[0]  ${passwd_list}[0]
 
 Test login with invalid password
-    Test failed login with non-empty credentials    Admin    123456
+    Test failed login with non-empty credentials  ${users_list}[1]  ${passwd_list}[1]
 
 Test login with both invalid
-    Test failed login with non-empty credentials    blah    blah
+    Test failed login with non-empty credentials  ${users_list}[0]  ${passwd_list}[2]
 

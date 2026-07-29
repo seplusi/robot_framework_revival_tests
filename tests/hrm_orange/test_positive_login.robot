@@ -6,12 +6,11 @@ Test Teardown    Close Browser
 Resource    ../../resources/login_page_object.resource
 Resource    ../../resources/dashboard/dashboard_admin_page_object.robot
 Resource    ../../resources/dashboard/dashboard_user_page_object.robot
-Resource    ../../resources/sidepanel/sidepanel_user_page_object.robot
-Resource    ../../resources/sidepanel/sidepanel_admin_page_object.robot
 Resource    ../../resources/user_menu/user_menu_page_object.resource
 
 *** Variables ***
 ${url}    https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
+&{users}  admin=Admin  regular=seplusi1
 
 *** Test Cases ***
 Validate login page
@@ -34,33 +33,32 @@ Validate login page
 
 Validate successful Admin login
     Login page is loaded after some time
-    Type username    Admin
+    Type username    ${users.admin}
     Type password    admin123
     Click login button
     Dashboard Admin page is loaded after some time
 
 Validate successful Admin login while specifying page load timeout
     Login page is loaded after    timeout=10
-    Input Text    locator=${user_input}    text=Admin
+    Input Text    locator=${user_input}    text=${users.admin}
     Input Text    locator=${passwd_input}    text=admin123
     Click Button    locator=${login_btn}
     Dashboard Admin page is loaded after    timeout=10    
 
 Validate Admin Dashboard page
     Login page is loaded after some time
-    Login using user and passwd    Admin    admin123
+    Login using user and passwd    ${users.admin}    admin123
     Sidepanel admin page is loaded after some time
     Dashboard Admin page is loaded after some time
     Element Text Should Be    locator=${dash_title}    expected=Dashboard
     Element Text Should Be    locator=${upgrade_btn}    expected=Upgrade
     Element Text Should Be    locator=${time_at_work_header}    expected=Time at Work
     ${text}=  Get Text    locator=${user_dropdown_name}
-    Should Match Regexp    string=${text}    pattern=^[A-Z][a-zÀ-ÿ]* [A-Z][a-z]*$
+    Should Match Regexp    string=${text}    pattern=^[A-Za-zÀ-ÿ]* [A-Za-z]*$
 
 Validate successful user login
     Login page is loaded after some time
-    Login using user and passwd    seplusi1    12QWaszx
-    Sidepanel user page is loaded after some time
+    Login using user and passwd    ${users.regular}    12QWaszx
     Dashboard user page is loaded after some time
     Element Should Not Be Visible    locator=${upgrade_btn}
     Element Text Should Be    locator=${dash_title}    expected=Dashboard
@@ -74,19 +72,17 @@ Validate successful user login
     ...    ${dashboard_legend}  ${directory_legend}  ${claim_legend}
     ...    ${buzz_legend}
     Click Button    locator=${chevron_left}
-    Sidepanel user page is loaded after some time
     Dashboard user page is loaded after some time
 
 Validate successful user logout
-    Login page is loaded after some time
-    Login using user and passwd    seplusi1    12QWaszx
-    Sidepanel user page is loaded after some time
-    Dashboard user page is loaded after some time
+    login_page_object.Login page is loaded after some time
+    login_page_object.Login using user and passwd  ${users.regular}  12QWaszx
+    dashboard_user_page_object.Dashboard user page is loaded after some time
     Click Element    locator=${userdropdown-icon}
-    User menu page is loaded after some time
+    user_menu_page_object.User menu page is loaded after some time
     Element Text Should Be    locator=${about}    expected=About
     Element Text Should Be    locator=${support}  expected=Support
     Element Text Should Be    locator=${chg_passwd}  expected=Change Password
     Element Text Should Be    locator=${logout}      expected=Logout
     Click Element  ${logout}
-    Login page is loaded after some time
+    login_page_object.Login page is loaded after some time

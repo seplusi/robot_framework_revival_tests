@@ -1,5 +1,6 @@
 *** Settings ***
 Resource    dashboard_common_page_object.robot
+Resource    ../sidepanel/sidepanel_admin_page_object.robot
 
 *** Keywords ***
 Dashboard Admin page is loaded after some time
@@ -12,3 +13,4 @@ Dashboard Admin page is loaded after
     Page is loaded after time    ${timeout}    ${dash_title}    
     ...    ${user_dropdown_name}    ${userdropdown-icon}    
     ...    ${userdropdown-img}    ${upgrade_btn}    ${time_at_work_header}
+    Sidepanel admin page is loaded after some time
