@@ -1,0 +1,5 @@
+${username};${passwd};${expected_err};
+blah;admin123;Invalid credentials;
+Admin;blah;Invalid credentials;
+blah;blah;Invalid credentials;
+seplusi2;12QWaszx;Account disabled;

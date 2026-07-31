@@ -1,0 +1,14 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "RobotCode: Debug Custom Python Code",
+      "type": "robotcode",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "target": "${file}",
+      "purpose": "default",
+      "attachPython": true
+    }
+  ]
+}

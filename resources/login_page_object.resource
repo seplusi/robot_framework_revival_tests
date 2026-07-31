@@ -49,3 +49,15 @@ Type password
 
 Click login button
     Click Button    locator=${login_btn}
+
+Invalid login with non-empty credentials
+    [Arguments]    ${username}    ${passwd}  ${url}  ${expected_err}
+    Go To    url=${url}
+    Login page is loaded after    10
+    Type username    username=${username}
+    Type password    password=${passwd}
+    Click login button
+    Wait Until Element Is Visible    locator=${login_err}
+    Element Should Be Visible    locator=${login_btn}
+    Element Should Be Visible    locator=${login_err}
+    Element Text Should Be    locator=${login_err}    expected=${expected_err}
