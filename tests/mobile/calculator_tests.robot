@@ -1,5 +1,8 @@
 *** Settings ***
 Library    AppiumLibrary
+Test Teardown  AppiumLibrary.Close All Applications
+Test Setup  Open chrome appium driver
+Resource       ../../resources/mobile/calculator_page_object.resource
 
 *** Variables ***
 ${ANDROID_AUTOMATION_NAME}    UIAutomator2
@@ -13,6 +16,11 @@ Open chrome appium driver
     ...    deviceName=RZCX10WSYZF
 
 *** Test Cases ***
-Test calculator android app
-    Open chrome appium driver
-    Wait Until Element Is Visible    locator=id:com.sec.android.app.popupcalculator:id/calc_keypad_btn_clear
+Test 1 + 1
+    Perform android calculator addition  btn_num1=1  btn_num2=1  result=2
+
+Test 2 + 1
+    Perform android calculator addition  btn_num1=2  btn_num2=1  result=3
+
+Test 9 + 9
+    Perform android calculator addition  btn_num1=9  btn_num2=9  result=18
